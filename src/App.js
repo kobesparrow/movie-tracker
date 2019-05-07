@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { fetchAll } from './api/fetchAll'
+import { apiKey } from './apikey'
+import { popularFetcher } from './api/genreFetcher'
 import './App.css';
+import { displayPopularMovies } from './actions';
+// import TestFetchForm from 'components/TestFetchForm'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      movies: ['Mahk', 'Duy']
+    }
+  }
+
+  testButton = (event) => {
+    event.preventDefault()
+    displayPopularMovies()
+  }
+
+  componentDidMount() {
+    // displayPopularMovies()
+  }
+
+  // getData = async () => {
+  //   const url = 'https://api.themoviedb.org/3/movie/'
+  //   const type = 'popular';
+  //   try {
+  //     const response = await fetchAll(`${url}${type}${apiKey}`)
+  //     this.setState({ movies: response.results })
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  render() {
+    return (
+      <div className="App">
+        <p>Movies</p> 
+        <button onClick={ this.testButton }>Test</button>
+        {/* <TestFetchForm /> */}
+      </div>
+    );
+  }
 }
 
 export default App;
