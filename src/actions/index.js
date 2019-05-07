@@ -1,5 +1,8 @@
-export const displayMovie = () => ({
-  type: 'DISPLAY_INITIAL_MOVIES'
+import { popularFetcher } from '../api/genreFetcher'
+
+export const displayPopularMovies = () => ({
+  type: 'DISPLAY_POPULAR_MOVIES',
+  payload: popularFetcher()
 })
 
 export const fetchMoviesBegin = () => ({
@@ -7,12 +10,12 @@ export const fetchMoviesBegin = () => ({
 });
 
 export const fetchMoviesSucess = () => ({
-  type: 'FETCH_MOVIES_SUCCESS'
+  type: 'FETCH_MOVIES_SUCCESS',
   payload: { movieData }
 });
 
 export const fetchMoviesFailure = () => ({
-  type: 'FETCH_PRODUCTS_FAILURE'
+  type: 'FETCH_PRODUCTS_FAILURE',
   payload: { error }
 })
 
