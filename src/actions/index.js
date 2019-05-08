@@ -1,8 +1,6 @@
-import { popularFetcher } from '../api/genreFetcher'
-
-export const displayPopularMovies = () => ({
+export const displayPopularMovies = (movie) => ({
   type: 'DISPLAY_POPULAR_MOVIES',
-  payload: ['Duy', 'Mark']
+  movie
 })
 
 

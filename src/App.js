@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchAll } from './api/fetchAll'
 import { apiKey } from './apikey'
 import { popularFetcher } from './api/genreFetcher'
+import { connect } from 'react-redux'
 import './App.css';
 import { displayPopularMovies } from './actions';
 // import TestFetchForm from 'components/TestFetchForm'
@@ -11,17 +12,18 @@ class App extends Component {
     super(props)
 
     this.state = {
-      movies: ['Mahk', 'Duy']
+      movies: []
     }
   }
 
   testButton = (event) => {
     event.preventDefault()
-    displayPopularMovies()
+    this.props.displayPopularMovies(this.state)
   }
 
   componentDidMount() {
-    // displayPopularMovies()
+    popularFetcher()
+      .then(result => this.setState({movies: result}))
   }
 
   // getData = async () => {
@@ -46,4 +48,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  movies: state.movies
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  displayPopularMovies: (movies) => dispatch(displayPopularMovies(movies))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
