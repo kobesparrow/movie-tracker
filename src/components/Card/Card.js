@@ -5,6 +5,6 @@ export default function Card({title, poster_path}) {
     <div>
       <h2>{title}</h2>
       <img src={poster_path}/>
-    </div>
+   </div>
   )
 }

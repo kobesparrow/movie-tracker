@@ -3,4 +3,12 @@ export const displayPopularMovies = (movie) => ({
   movie
 })
 
+export const createUser = (email, password, name, newUser) => ({
+  type: 'CREATE_USER',
+  email,
+  password,
+  name,
+  newUser
+})
+
 

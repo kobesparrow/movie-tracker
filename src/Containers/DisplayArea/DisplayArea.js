@@ -24,9 +24,6 @@ const mapStateToProps = (state) => ({
   movies: state.movies
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  displayPopularMovies: (movies) => dispatch(displayPopularMovies(movies))
-})
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DisplayArea)
+export default connect(mapStateToProps)(DisplayArea)
