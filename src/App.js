@@ -22,8 +22,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    popularFetcher()
-      .then(result => this.setState({movies: result}))
+    this.getMovies()
+  }
+
+  getMovies = async () => {
+    try {
+      const movies = await popularFetcher()
+      this.props.displayPopularMovies(movies)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   // getData = async () => {
@@ -38,6 +46,7 @@ class App extends Component {
   // }
 
   render() {
+    console.log(this.props.movies[0])
     return (
       <div className="App">
         <p>Movies</p> 
