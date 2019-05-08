@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
-import { fetchAll } from './api/fetchAll'
-import { apiKey } from './apikey'
-import { popularFetcher } from './api/genreFetcher'
-import { connect } from 'react-redux'
+import { popularFetcher } from './api/genreFetcher';
+import { connect } from 'react-redux';
 import './App.css';
 import { displayPopularMovies } from './actions';
+import HeaderNav from './components/HeaderNav/HeaderNav'
+import DisplayArea from './Containers/DisplayArea/DisplayArea'
 // import TestFetchForm from 'components/TestFetchForm'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      movies: []
-    }
-  }
-
-  testButton = (event) => {
-    event.preventDefault()
-    this.props.displayPopularMovies(this.state)
-  }
 
   componentDidMount() {
     this.getMovies()
@@ -33,25 +21,13 @@ class App extends Component {
       console.log(error)
     }
   }
-
-  // getData = async () => {
-  //   const url = 'https://api.themoviedb.org/3/movie/'
-  //   const type = 'popular';
-  //   try {
-  //     const response = await fetchAll(`${url}${type}${apiKey}`)
-  //     this.setState({ movies: response.results })
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-
+  
   render() {
-    console.log(this.props.movies[0])
+    console.log(this.props.movies)
     return (
       <div className="App">
-        <p>Movies</p> 
-        <button onClick={ this.testButton }>Test</button>
-        {/* <TestFetchForm /> */}
+        <HeaderNav />
+        <DisplayArea />
       </div>
     );
   }
