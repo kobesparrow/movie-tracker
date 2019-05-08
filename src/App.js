@@ -5,7 +5,7 @@ import './App.css';
 import { displayPopularMovies } from './actions';
 import HeaderNav from './components/HeaderNav/HeaderNav'
 import DisplayArea from './Containers/DisplayArea/DisplayArea'
-// import TestFetchForm from 'components/TestFetchForm'
+import UserInputs from './components/UserInputs/UserInputs'
 
 class App extends Component {
 
@@ -27,6 +27,7 @@ class App extends Component {
     return (
       <div className="App">
         <HeaderNav />
+        <UserInputs />
         <DisplayArea />
       </div>
     );
