@@ -11,9 +11,12 @@ class DisplayArea extends Component {
 
   
   render() {
-    const moviesArray = this.props.movies.map( movie => <Card {...movie}/>)
+    const moviesArray = this.props.movies.map( movie => {
+      return <Card {...movie} key={movie.id} />
+    })
+
     return (
-      <div>
+      <div className='display-area'>
         {moviesArray}
       </div>
     )

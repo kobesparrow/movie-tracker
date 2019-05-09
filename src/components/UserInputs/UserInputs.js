@@ -6,22 +6,36 @@ export default class UserInputs extends Component {
       this.state = {
           name: '',
           email: '',
-          password: '',
-          newUser: true
+          password: ''
       }
   }
 
   handleChange = (e) => {
     const { name, value } = e.target
     this.setState({[name]: value})
-    console.log(e.target)
-  }  
+  }
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let urlLogin = 'http://localhost:3000/api/users'
+    const init = {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    fetch(urlLogin, init)
+      .then(response => response.json())
+      .then(users => console.log(users))
+      .catch(error => console.log(error.message))
+  }
 
   render() {
     const { handleChange } = this
     return (
       <div>
-        <form onSubmit=''>
+        <form onSubmit={ this.handleSubmit }>
             <label>
                 Name
                 <input
