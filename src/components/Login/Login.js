@@ -1,20 +1,10 @@
 import React from 'react';
 
-const SignUp = ({name, password, email, handleChange, handleSubmit}) => {
+const Login = ({ password, email, handleChange, handleSubmit }) => {
   return (
     <div>
-      <h4>Sign up:</h4>
+      <h4>Login:</h4>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input
-            type='text'
-            name='name'
-            placeholder='Name'
-            value={name}
-            onChange={handleChange}
-          />
-        </label>
         <label>
           E-mail
           <input
@@ -44,4 +34,4 @@ const SignUp = ({name, password, email, handleChange, handleSubmit}) => {
   )
 }
 
-export default SignUp;
+export default Login;

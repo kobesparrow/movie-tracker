@@ -6,7 +6,6 @@ import { displayPopularMovies } from './actions';
 import HeaderNav from './components/HeaderNav/HeaderNav'
 import DisplayArea from './containers/DisplayArea/DisplayArea'
 import UserInputs from './components/UserInputs/UserInputs'
-import SignUp from './components/SignUp/SignUp'
 
 class App extends Component {
 
@@ -29,7 +28,6 @@ class App extends Component {
       <div className="App">
         <HeaderNav />
         <UserInputs />
-        <SignUp />
         <DisplayArea />
       </div>
     );

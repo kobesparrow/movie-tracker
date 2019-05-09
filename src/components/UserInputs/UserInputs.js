@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions';
+import { loginUser, addUser } from '../../actions';
+import SignUp from '../SignUp/SignUp';
+import Login from '../Login/Login'
 // import { dispatch } from 'redux';
 
 export class UserInputs extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          newName: '',
-          newEmail: '',
-          newPassword: '',
           name: '',
           email: '',
-          password: ''
+          password: '',
+          newUser: true
       }
   }
 
@@ -20,82 +20,64 @@ export class UserInputs extends Component {
     const { name, value } = e.target
     this.setState({[name]: value})
   }
-
-  handleChanges = (e) => {
-    const { name, value } = e.target
-    this.setState({ [name]: value })
-  }
   
-  handleLogin = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    let endpoint = 'users'
-    const init = {
+    if (this.state.newUser) {
+      this.addUser()
+    } else {
+      this.fetchUser()
+    }
+  }
+
+  fetchUser = () => {
+    fetch('http://localhost:3000/api/users', {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
         'Content-Type': 'application/json'
       }
-    }
-    fetch(`http://localhost:3000/api/${endpoint}`, init)
+    })
       .then(response => response.json())
       .then(currentUser => this.props.loginUser(currentUser.data))
       .catch(error => console.log(error.message))
   }
 
-  handleNewUser = (e) => {
-    e.preventDefault();
-    let endpoint = 'users/new'
-    const init = {
+  addUser = () => {
+    fetch('http://localhost:3000/api/users/new', {
       method: 'POST',
       body: JSON.stringify(this.state),
       headers: {
         'Content-Type': 'application/json'
       }
-    }
-    fetch(`http://localhost:3000/api/${endpoint}`, init)
+    })
       .then(response => response.json())
-      .then(currentUser => this.props.loginUser(currentUser.data))
+      .then(newUser => this.props.addUser(newUser))
       .catch(error => console.log(error.message))
   }
 
   render() {
-    const { handleChange, handleChanges } = this
+    const { handleSubmit, handleChange } = this
     return (
       <div>
-        <h4>Login:</h4>
-        <form onSubmit={ this.handleLogin }>
-          <label>
-              E-mail
-              <input
-                  type='email'
-                  name='email'
-                  placeholder='example@example.com...'
-                  value={this.state.email}
-                  onChange={handleChange}
-              />
-          </label>
-          <label>
-              Password
-              <input
-                  type='password'
-                  name='password'
-                  placeholder='Password'
-                  value={this.state.password}
-                  onChange={handleChange}
-              />
-          </label>
-          <input
-              type='submit'
-              value='Login'
-          />
-        </form>  
+        <Login 
+          {...this.state}
+          handleSubmit={ handleSubmit }
+          handleChange={ handleChange }
+        />
+        <SignUp 
+          {...this.state}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+        /> 
       </div>
     )
   }
 }
 
 export const mapDispatchToState = (dispatch) => ({
-  loginUser: (user) => dispatch(loginUser(user)) 
+  loginUser: (user) => dispatch(loginUser(user)),
+  addUser: (user) => dispatch(addUser(user))
 })
 
 export default connect(null, mapDispatchToState)(UserInputs)
