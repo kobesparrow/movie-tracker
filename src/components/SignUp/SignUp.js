@@ -3,29 +3,26 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../actions';
 // import { dispatch } from 'redux';
 
-export class UserInputs extends Component {
+export class SignUp extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-          newName: '',
-          newEmail: '',
-          newPassword: '',
-          name: '',
-          email: '',
-          password: ''
-      }
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    }
   }
 
   handleChange = (e) => {
     const { name, value } = e.target
-    this.setState({[name]: value})
+    this.setState({ [name]: value })
   }
 
   handleChanges = (e) => {
     const { name, value } = e.target
     this.setState({ [name]: value })
   }
-  
+
   handleLogin = (e) => {
     e.preventDefault();
     let endpoint = 'users'
@@ -62,40 +59,50 @@ export class UserInputs extends Component {
     const { handleChange, handleChanges } = this
     return (
       <div>
-        <h4>Login:</h4>
-        <form onSubmit={ this.handleLogin }>
+        <h4>Sign up:</h4>
+        <form onSubmit={this.handleNewUser}>
           <label>
-              E-mail
-              <input
-                  type='email'
-                  name='email'
-                  placeholder='example@example.com...'
-                  value={this.state.email}
-                  onChange={handleChange}
-              />
+            Name
+                <input
+              type='text'
+              name='newName'
+              placeholder='Name'
+              value={this.state.newName}
+              onChange={handleChanges}
+            />
           </label>
           <label>
-              Password
+            E-mail
               <input
-                  type='password'
-                  name='password'
-                  placeholder='Password'
-                  value={this.state.password}
-                  onChange={handleChange}
-              />
+              type='email'
+              name='newEmail'
+              placeholder='example@example.com...'
+              value={this.state.newEmail}
+              onChange={handleChanges}
+            />
+          </label>
+          <label>
+            Password
+              <input
+              type='password'
+              name='newPassword'
+              placeholder='Password'
+              value={this.state.newPassword}
+              onChange={handleChanges}
+            />
           </label>
           <input
-              type='submit'
-              value='Login'
+            type='submit'
+            value='Login'
           />
-        </form>  
+        </form>
       </div>
     )
   }
 }
 
 export const mapDispatchToState = (dispatch) => ({
-  loginUser: (user) => dispatch(loginUser(user)) 
+  loginUser: (user) => dispatch(loginUser(user))
 })
 
-export default connect(null, mapDispatchToState)(UserInputs)
+export default connect(null, mapDispatchToState)(SignUp)
