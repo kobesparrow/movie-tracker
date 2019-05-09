@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions';
+// import { dispatch } from 'redux';
 
-export default class UserInputs extends Component {
+export class UserInputs extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -27,7 +30,7 @@ export default class UserInputs extends Component {
     }
     fetch(urlLogin, init)
       .then(response => response.json())
-      .then(users => console.log(users))
+      .then(currentUser => this.props.loginUser(currentUser.data))
       .catch(error => console.log(error.message))
   }
 
@@ -75,3 +78,9 @@ export default class UserInputs extends Component {
     )
   }
 }
+
+export const mapDispatchToState = (dispatch) => ({
+  loginUser: (user) => dispatch(loginUser(user)) 
+})
+
+export default connect(null, mapDispatchToState)(UserInputs)
