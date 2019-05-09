@@ -12,7 +12,7 @@ export class UserInputs extends Component {
           name: '',
           email: '',
           password: '',
-          newUser: true
+          newUser: false
       }
   }
 
@@ -56,6 +56,11 @@ export class UserInputs extends Component {
       .catch(error => console.log(error.message))
   }
 
+  toggleNewUser = (e) => {
+    e.preventDefault();
+    this.setState({ newUser: !this.state.newUser })
+  }
+
   render() {
     const { handleSubmit, handleChange } = this
     return (
@@ -69,7 +74,8 @@ export class UserInputs extends Component {
           {...this.state}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-        /> 
+        />
+        <button onClick={ this.toggleNewUser }>createUser</button> 
       </div>
     )
   }
