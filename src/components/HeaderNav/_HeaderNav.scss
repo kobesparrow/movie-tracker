@@ -1,0 +1,37 @@
+$primary-color: #FBFF12;
+$secondary-color: #1BE7FF;
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
+  color: #A4D555;
+}
+
+header {
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+  align-items: center;
+  margin: auto;
+  font-size: 1.5em;
+}
+
+.header-section {
+  width: 100%;
+  background-color: $primary-color;
+  margin-bottom: 20px;
+}
+
+.active {
+  background-color: $secondary-color;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $primary-color
+}

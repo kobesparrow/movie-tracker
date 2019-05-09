@@ -4,7 +4,7 @@ import { fetchAll } from './fetchAll'
 const popularFetcher = async () => {
   const url = 'https://api.themoviedb.org/3/movie/'
   const type = 'popular?';
-  const api = `api_key=${apiKey}`
+  const api = `${apiKey}`
   try {
     const response = await fetchAll(`${url}${type}${api}&language=en-US&page=1`)
     return response.results
