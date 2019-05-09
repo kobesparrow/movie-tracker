@@ -1,14 +1,11 @@
-export const displayPopularMovies = (movie) => ({
+export const displayPopularMovies = (movies) => ({
   type: 'DISPLAY_POPULAR_MOVIES',
-  movie
+  movies
 })
 
-export const createUser = (email, password, name, newUser) => ({
-  type: 'CREATE_USER',
-  email,
-  password,
-  name,
-  newUser
+export const loginUser = (currentUser) => ({
+  type: 'LOGIN_USER',
+  currentUser
 })
 
 

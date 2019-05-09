@@ -11,6 +11,7 @@ class DisplayArea extends Component {
 
   
   render() {
+    console.log(this.props.user)
     const moviesArray = this.props.movies.map( movie => {
       return <Card {...movie} key={movie.id} />
     })
@@ -24,7 +25,8 @@ class DisplayArea extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  movies: state.movies
+  movies: state.movies,
+  user: state.currentUser
 })
 
 
