@@ -63,19 +63,29 @@ export class UserInputs extends Component {
 
   render() {
     const { handleSubmit, handleChange } = this
-    return (
-      <div>
-        <Login 
-          {...this.state}
-          handleSubmit={ handleSubmit }
-          handleChange={ handleChange }
-        />
-        <SignUp 
+    let loginArea
+    if (this.state.newUser) {
+      loginArea = 
+        <SignUp
           {...this.state}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
         />
-        <button onClick={ this.toggleNewUser }>createUser</button> 
+    } else {
+      loginArea = 
+        <div>
+          <Login
+            {...this.state}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+          />
+          <button onClick={this.toggleNewUser}>createUser</button>
+        </div>
+    }
+
+    return (
+      <div>
+        { loginArea }
       </div>
     )
   }
