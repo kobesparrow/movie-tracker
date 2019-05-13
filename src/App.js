@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { popularFetcher } from './api/genreFetcher';
 import { connect } from 'react-redux';
 import './base.scss';
-import { displayPopularMovies } from './actions';
+import { displayMovies } from './actions';
 import { Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav/HeaderNav'
-import DisplayArea from './Containers/DisplayArea/DisplayArea'
+import DisplayArea from './containers/DisplayArea/DisplayArea'
 import UserInputs from './components/UserInputs/UserInputs'
 import {MovieDetails} from './components/MovieDetails/MovieDetails'
 
@@ -19,7 +19,7 @@ class App extends Component {
     console.log(type)
     try {
       const movies = await popularFetcher(type)
-      this.props.displayPopularMovies(movies)
+      this.props.displayMovies(movies)
     } catch (error) {
       console.log(error.message)
     }
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  displayPopularMovies: (movies) => dispatch(displayPopularMovies(movies))
+  displayMovies: (movies) => dispatch(displayMovies(movies))
 })
 
 

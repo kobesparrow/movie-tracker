@@ -12,6 +12,7 @@ export class UserInputs extends Component {
           name: '',
           email: '',
           password: '',
+          favorites: [],
           newUser: false
       }
   }
@@ -23,7 +24,6 @@ export class UserInputs extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-
     if (this.state.newUser) {
       this.addUser()
     } else {
@@ -32,18 +32,6 @@ export class UserInputs extends Component {
   }
 
   fetchUser = () => {
-    // try {
-    //   const response = await fetch('http://localhost:3000/api/users', {
-    //     method: 'POST',
-    //     body: JSON.stringify(this.state),
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     }
-    //   })
-    //   return response.results
-    // } catch (error) {
-    //   console.log(error)
-    // }
     fetch('http://localhost:3000/api/users', {
       method: 'POST',
       body: JSON.stringify(this.state),

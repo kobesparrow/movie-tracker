@@ -1,6 +1,11 @@
-export const displayPopularMovies = (movies) => ({
-  type: 'DISPLAY_POPULAR_MOVIES',
+export const displayMovies = (movies) => ({
+  type: 'DISPLAY_MOVIES',
   movies
+})
+
+export const favoriteMovie = (id) => ({
+  type: 'FAVORITE_MOVIE',
+  id
 })
 
 export const loginUser = (currentUser) => ({
