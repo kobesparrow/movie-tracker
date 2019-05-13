@@ -9,8 +9,9 @@ export class Card extends Component {
   
   render() {
     const imageSource = `https://image.tmdb.org/t/p/w500/${this.props.poster_path}`
+    console.log(this.props.id)
     return (
-      <Link to={`popular/${this.props.id}`}>
+      <Link to={`popular/${this.props.movie_id}`}>
           <img src={imageSource} className='movie-img' />
       </Link>
     )

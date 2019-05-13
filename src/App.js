@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav/HeaderNav'
 import DisplayArea from './containers/DisplayArea/DisplayArea'
 import UserInputs from './components/UserInputs/UserInputs'
-import {MovieDetails} from './components/MovieDetails/MovieDetails'
+import MovieDetails from './components/MovieDetails/MovieDetails'
 
 class App extends Component {
 
@@ -38,7 +38,7 @@ class App extends Component {
 
         <Route path='/popular/:id' render={({ match }) => {
           const movieDescription = this.props.movies.find( movie => {
-            return movie.id === parseInt(match.params.id)
+            return movie.movie_id === parseInt(match.params.id)
           })
             if(movieDescription) {
               return <MovieDetails {...movieDescription} />
