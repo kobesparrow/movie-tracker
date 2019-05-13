@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions';
+import { loginUser, addUser } from '../../actions';
+import SignUp from '../SignUp/SignUp';
+import Login from '../Login/Login'
+// import { dispatch } from 'redux';
 
 export class UserInputs extends Component {
   constructor(props) {
@@ -8,7 +11,8 @@ export class UserInputs extends Component {
       this.state = {
           name: '',
           email: '',
-          password: ''
+          password: '',
+          newUser: false
       }
   }
 
@@ -19,70 +23,93 @@ export class UserInputs extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    if(e.target.value === 'Login') {
-        let urlLogin = 'http://localhost:3000/api/users'
-        const init = {
-          method: 'POST',
-          body: JSON.stringify(this.state),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-        fetch(urlLogin, init)
-          .then(response => response.json())
-          .then(currentUser => this.props.loginUser(currentUser.data))
-          .catch(error => console.log(error.message))
-    }
 
+    if (this.state.newUser) {
+      this.addUser()
+    } else {
+      this.fetchUser()
+    }
+  }
+
+  fetchUser = () => {
+    // try {
+    //   const response = await fetch('http://localhost:3000/api/users', {
+    //     method: 'POST',
+    //     body: JSON.stringify(this.state),
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   })
+    //   return response.results
+    // } catch (error) {
+    //   console.log(error)
+    // }
+    fetch('http://localhost:3000/api/users', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(currentUser => this.props.loginUser(currentUser.data))
+      .catch(error => console.log(error.message))
+  }
+
+  addUser = () => {
+    fetch('http://localhost:3000/api/users/new', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(newUser => this.props.addUser(newUser))
+      .catch(error => console.log(error.message))
+  }
+
+  toggleNewUser = (e) => {
+    e.preventDefault();
+    this.setState({ newUser: !this.state.newUser })
   }
 
   render() {
-    const { handleChange } = this
+    const { handleSubmit, handleChange } = this
+    let loginArea
+    if (this.state.newUser) {
+      loginArea = 
+        <div>
+          <SignUp
+            {...this.state}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+          />
+          <button onClick={ this.toggleNewUser } className='switch-button'>Or login</button>
+        </div> 
+    } else {
+      loginArea = 
+        <div>
+          <Login
+            {...this.state}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+          />
+        <button onClick={ this.toggleNewUser } className='switch-button'>createUser</button>
+        </div>
+    }
+
     return (
       <div>
-        <form onSubmit={ this.handleSubmit }>
-            <label>
-                Name
-                <input
-                    type='text'
-                    name='name'
-                    placeholder='Name'
-                    value={this.state.name}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                E-mail
-                <input
-                    type='email'
-                    name='email'
-                    placeholder='example@example.com...'
-                    value={this.state.email}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Password
-                <input
-                    type='password'
-                    name='password'
-                    placeholder='Password'
-                    value={this.state.password}
-                    onChange={handleChange}
-                />
-            </label>
-            <input
-                type='submit'
-                value='Login'
-            />
-        </form>
+        { loginArea }
       </div>
     )
   }
 }
 
 export const mapDispatchToState = (dispatch) => ({
-  loginUser: (user) => dispatch(loginUser(user)) 
+  loginUser: (user) => dispatch(loginUser(user)),
+  addUser: (user) => dispatch(addUser(user))
 })
 
 export default connect(null, mapDispatchToState)(UserInputs)

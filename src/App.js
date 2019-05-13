@@ -12,12 +12,13 @@ import {MovieDetails} from './components/MovieDetails/MovieDetails'
 class App extends Component {
 
   componentDidMount() {
-    this.getMovies()
+    this.getMovies('popular?')
   }
 
-  getMovies = async () => {
+  getMovies = async (type) => {
+    console.log(type)
     try {
-      const movies = await popularFetcher()
+      const movies = await popularFetcher(type)
       this.props.displayPopularMovies(movies)
     } catch (error) {
       console.log(error.message)
@@ -28,7 +29,7 @@ class App extends Component {
     console.log(this.props.movies)
     return (
       <div className="App">
-        <HeaderNav />
+        <HeaderNav getMovies={ this.getMovies }/>
         <UserInputs />
         <Route exact path='/popular' component={DisplayArea} />
 

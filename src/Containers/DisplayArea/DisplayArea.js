@@ -9,7 +9,6 @@ class DisplayArea extends Component {
   }
 
   render() {
-    console.log(this.props.user)
     const moviesArray = this.props.movies.map( movie => {
       return <Card {...movie} key={movie.id} />
     })
