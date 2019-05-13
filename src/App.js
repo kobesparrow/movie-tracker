@@ -10,12 +10,13 @@ import UserInputs from './components/UserInputs/UserInputs'
 class App extends Component {
 
   componentDidMount() {
-    this.getMovies()
+    this.getMovies('popular?')
   }
 
-  getMovies = async () => {
+  getMovies = async (type) => {
+    console.log(type)
     try {
-      const movies = await popularFetcher()
+      const movies = await popularFetcher(type)
       this.props.displayPopularMovies(movies)
     } catch (error) {
       console.log(error)
@@ -26,7 +27,7 @@ class App extends Component {
     console.log(this.props.movies)
     return (
       <div className="App">
-        <HeaderNav />
+        <HeaderNav getMovies={ this.getMovies }/>
         <UserInputs />
         <DisplayArea />
       </div>
