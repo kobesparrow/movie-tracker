@@ -18,7 +18,7 @@ class HeaderNav extends Component {
             <NavLink to='/popular' onClick={ () => this.props.getMovies('popular?') } className='nav'>Popular</NavLink>
             <NavLink to='/upcoming' onClick={ () => this.props.getMovies('upcoming?') } className='nav'>Upcoming</NavLink>
             <NavLink to='/toprated' onClick={ () => this.props.getMovies('top_rated?') } className='nav'>Top Rated</NavLink>
-            <NavLink to='/latest' onClick={ () => this.props.getMovies('latest?') } className='nav'>Latest</NavLink>
+            <NavLink to='/nowplaying' onClick={ () => this.props.getMovies('now_playing?') } className='nav'>Now Playing</NavLink>
           </header>
         </section>
       </div>

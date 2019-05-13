@@ -32,6 +32,9 @@ class App extends Component {
         <HeaderNav getMovies={ this.getMovies }/>
         <UserInputs />
         <Route exact path='/popular' component={DisplayArea} />
+        <Route exact path='/upcoming' component={DisplayArea} />
+        <Route exact path='/toprated' component={DisplayArea} />
+        <Route exact path='/nowplaying' component={DisplayArea} />
 
         <Route path='/popular/:id' render={({ match }) => {
           const movieDescription = this.props.movies.find( movie => {
