@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions';
-// import { dispatch } from 'redux';
 
 export class UserInputs extends Component {
   constructor(props) {
@@ -20,18 +19,21 @@ export class UserInputs extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    let urlLogin = 'http://localhost:3000/api/users'
-    const init = {
-      method: 'POST',
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+    if(e.target.value === 'Login') {
+        let urlLogin = 'http://localhost:3000/api/users'
+        const init = {
+          method: 'POST',
+          body: JSON.stringify(this.state),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+        fetch(urlLogin, init)
+          .then(response => response.json())
+          .then(currentUser => this.props.loginUser(currentUser.data))
+          .catch(error => console.log(error.message))
     }
-    fetch(urlLogin, init)
-      .then(response => response.json())
-      .then(currentUser => this.props.loginUser(currentUser.data))
-      .catch(error => console.log(error.message))
+
   }
 
   render() {

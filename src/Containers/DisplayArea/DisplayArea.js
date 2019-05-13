@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from '../../components/Card/Card';
-import { displayPopularMovies } from '../../actions'
 
 class DisplayArea extends Component {
   constructor(props) {
@@ -9,7 +8,6 @@ class DisplayArea extends Component {
     
   }
 
-  
   render() {
     console.log(this.props.user)
     const moviesArray = this.props.movies.map( movie => {
