@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from '../../components/Card/Card';
-import { displayPopularMovies } from '../../actions'
 
 class DisplayArea extends Component {
   constructor(props) {

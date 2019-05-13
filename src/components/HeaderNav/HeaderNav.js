@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { displayPopularMovies } from '../../actions';
 import { connect } from 'react-redux';
 
+
 class HeaderNav extends Component {
   constructor(props) {
     super(props)
@@ -30,5 +31,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(null, mapDispatchToProps)(HeaderNav);
+
+
 
 

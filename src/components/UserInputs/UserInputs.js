@@ -23,6 +23,7 @@ export class UserInputs extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
+
     if (this.state.newUser) {
       this.addUser()
     } else {

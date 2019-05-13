@@ -3,9 +3,11 @@ import { popularFetcher } from './api/genreFetcher';
 import { connect } from 'react-redux';
 import './base.scss';
 import { displayPopularMovies } from './actions';
+import { Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav/HeaderNav'
-import DisplayArea from './containers/DisplayArea/DisplayArea'
+import DisplayArea from './Containers/DisplayArea/DisplayArea'
 import UserInputs from './components/UserInputs/UserInputs'
+import {MovieDetails} from './components/MovieDetails/MovieDetails'
 
 class App extends Component {
 
@@ -19,17 +21,26 @@ class App extends Component {
       const movies = await popularFetcher(type)
       this.props.displayPopularMovies(movies)
     } catch (error) {
-      console.log(error)
+      console.log(error.message)
     }
   }
   
-  render() {
+  render() { 
     console.log(this.props.movies)
     return (
       <div className="App">
         <HeaderNav getMovies={ this.getMovies }/>
         <UserInputs />
-        <DisplayArea />
+        <Route exact path='/popular' component={DisplayArea} />
+
+        <Route path='/popular/:id' render={({ match }) => {
+          const movieDescription = this.props.movies.find( movie => {
+            return movie.id === parseInt(match.params.id)
+          })
+            if(movieDescription) {
+              return <MovieDetails {...movieDescription} />
+            }
+        }} />
       </div>
     );
   }
