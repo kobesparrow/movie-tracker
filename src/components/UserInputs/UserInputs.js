@@ -31,6 +31,18 @@ export class UserInputs extends Component {
   }
 
   fetchUser = () => {
+    // try {
+    //   const response = await fetch('http://localhost:3000/api/users', {
+    //     method: 'POST',
+    //     body: JSON.stringify(this.state),
+    //     headers: {
+    //       'Content-Type': 'application/json'
+    //     }
+    //   })
+    //   return response.results
+    // } catch (error) {
+    //   console.log(error)
+    // }
     fetch('http://localhost:3000/api/users', {
       method: 'POST',
       body: JSON.stringify(this.state),
@@ -66,11 +78,14 @@ export class UserInputs extends Component {
     let loginArea
     if (this.state.newUser) {
       loginArea = 
-        <SignUp
-          {...this.state}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-        />
+        <div>
+          <SignUp
+            {...this.state}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+          />
+          <button onClick={ this.toggleNewUser } className='switch-button'>Or login</button>
+        </div> 
     } else {
       loginArea = 
         <div>
@@ -79,7 +94,7 @@ export class UserInputs extends Component {
             handleSubmit={handleSubmit}
             handleChange={handleChange}
           />
-          <button onClick={this.toggleNewUser}>createUser</button>
+        <button onClick={ this.toggleNewUser } className='switch-button'>createUser</button>
         </div>
     }
 
