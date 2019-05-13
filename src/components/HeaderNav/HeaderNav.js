@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { displayPopularMovies } from '../../actions';
-import { connect } from 'react-redux';
 
 
-class HeaderNav extends Component {
+export default class HeaderNav extends Component {
   constructor(props) {
     super(props)
   }
@@ -25,13 +23,6 @@ class HeaderNav extends Component {
     )
   }
 }
-
-const mapDispatchToProps = (dispatch) => ({
-  displayPopularMovies: (movies) => dispatch(displayPopularMovies(movies))
-})
-
-export default connect(null, mapDispatchToProps)(HeaderNav);
-
 
 
 
