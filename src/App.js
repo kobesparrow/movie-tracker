@@ -46,6 +46,7 @@ class App extends Component {
         <Route exact path='/upcoming' component={DisplayArea} />
         <Route exact path='/toprated' component={DisplayArea} />
         <Route exact path='/nowplaying' component={DisplayArea} />
+        <Route exact path='/favorites' component={DisplayArea} />
 
         <Route path='/popular/:id' render={({ match }) => {
           const movieDescription = this.props.movies.find( movie => {
