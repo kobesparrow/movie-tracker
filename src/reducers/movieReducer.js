@@ -21,6 +21,8 @@ export const movieReducer = ( state=[], action) => {
         return newState
       case 'DISPLAY_FAVORITES':
         return action.favorites
+      case 'EMPTY_MOVIES':
+        return []
     default:
       return state
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions';
+import { loginUser, logoutUserGlobally, emptyMovieState } from "../../actions";
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login'
 
@@ -68,6 +68,8 @@ export class UserInputs extends Component {
       newUser: false,
       loggedIn: false
     });
+    this.props.logoutUserGlobally();
+    this.props.emptyMovieState();
   }
 
   toggleNewUser = (e) => {
@@ -124,8 +126,10 @@ export const mapPropsToState = (state) => ({
   user: state.user
 })
 
-export const mapDispatchToState = (dispatch) => ({
-  loginUser: (user) => dispatch(loginUser(user))
-})
+export const mapDispatchToState = dispatch => ({
+  loginUser: user => dispatch(loginUser(user)),
+  logoutUserGlobally: () => dispatch(logoutUserGlobally()),
+  emptyMovieState: () => dispatch(emptyMovieState())
+});
 
 export default connect(mapPropsToState, mapDispatchToState)(UserInputs)
