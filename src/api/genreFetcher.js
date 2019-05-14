@@ -2,7 +2,6 @@ import { apiKey } from '../apikey'
 import { fetchAll } from './fetchAll'
 
 const popularFetcher = async (type) => {
-  console.log(type)
   const url = 'https://api.themoviedb.org/3/movie/'
   // const type = 'popular?';
   const api = `${apiKey}`

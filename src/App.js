@@ -16,7 +16,6 @@ class App extends Component {
   }
 
   getMovies = async (type) => {
-    console.log(type)
     try {
       const movies = await popularFetcher(type)
       this.props.displayMovies(movies)
@@ -26,9 +25,9 @@ class App extends Component {
   }
   
   render() { 
-    console.log(this.props.movies)
     return (
       <div className="App">
+        Hello, {this.props.user.id}
         <HeaderNav getMovies={ this.getMovies }/>
         <UserInputs />
         <Route exact path='/popular' component={DisplayArea} />
@@ -41,7 +40,7 @@ class App extends Component {
             return movie.movie_id === parseInt(match.params.id)
           })
             if(movieDescription) {
-              return <MovieDetails {...movieDescription} />
+              return <MovieDetails {...movieDescription} user={this.props.user} />
             }
         }} />
       </div>
@@ -50,6 +49,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   movies: state.movies
 })
 

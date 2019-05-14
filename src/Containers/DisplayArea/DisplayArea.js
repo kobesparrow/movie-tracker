@@ -3,14 +3,10 @@ import { connect } from 'react-redux';
 import Card from '../../components/Card/Card';
 
 class DisplayArea extends Component {
-  constructor(props) {
-    super(props);
-    
-  }
 
   render() {
     const moviesArray = this.props.movies.map( movie => {
-      return <Card {...movie} key={movie.id} />
+      return <Card {...movie} key={movie.movie_id} />
     })
 
     return (
@@ -23,7 +19,7 @@ class DisplayArea extends Component {
 
 const mapStateToProps = (state) => ({
   movies: state.movies,
-  user: state.currentUser
+  user: state.user
 })
 
 

@@ -4,40 +4,39 @@ import { connect } from 'react-redux';
 
 export class MovieDetails extends Component {
   
-  // handleClick = () => {
-  //   if (!this.props.favorite) {
-  //     this.addFavorite()
-  //   } else {
-  //     this.removeFavorite()
-  //   }
-  // }
+  handleClick = () => {
+    if (!this.props.favorite) {
+      this.addFavorite()
+    } else {
+      this.removeFavorite()
+    }
+  }
   
-  // addFavorite = () => {
-  //   console.log('test add')
-  //   fetch(`http://localhost:3000/api/users/${this.props.user.id}/favorites`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //         movie_id: this.props.movie_id,
-  //         title: this.props.title,
-  //         user_id: this.props.user.id,
-  //         poster_path: this.props.poster_path,
-  //         release_date: this.props.release_date,
-  //         vote_average: this.props.vote_average,
-  //         overview: this.props.overview,
-  //         favorite: !this.props.favorite
-  //       }),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //     })
-  //       .then(response => response.json())
-  //       .then(result => console.log(result))
-  //       .catch(error => console.log(error.message))
-  //   }
+  addFavorite = () => {
+    fetch('http://localhost:3000/api/users/favorites/new', {
+      method: 'POST',
+      body: JSON.stringify({
+          movie_id: this.props.movie_id,
+          title: this.props.title,
+          user_id: this.props.user.id,
+          poster_path: this.props.poster_path,
+          release_date: this.props.release_date,
+          vote_average: this.props.vote_average,
+          overview: this.props.overview,
+          favorite: true
+        }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+      })
+        .then(response => response.json())
+        .then(result => console.log('result', result))
+        .catch(error => console.log(error.message))
+    }
     
-  //   removeFavorite = () => {
-  //     console.log('test remove')
-  //   }
+    removeFavorite = () => {
+      console.log('test remove')
+    }
     
     render() {
     const { title, poster_path, overview } = this.props
@@ -45,10 +44,10 @@ export class MovieDetails extends Component {
     
     return (
       <div>
-        {/* <button onClick={ this.handleClick }>Favorite</button> */}
+        <button onClick={ this.handleClick }>Favorite</button>
         <Link to='/popular' className='back-button'>Back</Link>
         <h1>{title}</h1>
-        <img src={imageSource} />
+        <img src={imageSource} alt='movie poster' />
         <p>{overview}</p>
       </div>
     )
@@ -56,7 +55,7 @@ export class MovieDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.currentUser
+  user: state.user
 })
 
 export default connect(mapStateToProps)(MovieDetails)

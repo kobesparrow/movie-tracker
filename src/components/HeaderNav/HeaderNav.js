@@ -3,9 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 
 export default class HeaderNav extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     return (
