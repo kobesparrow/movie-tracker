@@ -13,6 +13,10 @@ export const displayFavorites = (favorites) => ({
   favorites
 })
 
+export const emptyMovieState = () => ({
+  type: 'EMPTY_MOVIES'
+})
+
 export const loginUser = (currentUser) => ({
   type: 'LOGIN_USER',
   currentUser
@@ -22,5 +26,13 @@ export const addUser = (newUser) => ({
   type: 'ADD_USER',
   newUser
 })
+
+export const logoutUserGlobally = () => ({
+  type: 'LOGOUT_USER'
+})
+
+
+
+
 
 
