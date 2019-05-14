@@ -8,6 +8,11 @@ export const toggleFavorite = (movieId) => ({
   movieId
 })
 
+export const displayFavorites = (favorites) => ({
+  type: 'DISPLAY_FAVORITES',
+  favorites
+})
+
 export const loginUser = (currentUser) => ({
   type: 'LOGIN_USER',
   currentUser

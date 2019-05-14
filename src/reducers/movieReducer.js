@@ -19,6 +19,8 @@ export const movieReducer = ( state=[], action) => {
           return movie
         })
         return newState
+      case 'DISPLAY_FAVORITES':
+        return action.favorites
     default:
       return state
   }
