@@ -27,7 +27,6 @@ class App extends Component {
   render() { 
     return (
       <div className="App">
-        Hello, {this.props.user.id}
         <HeaderNav getMovies={ this.getMovies }/>
         <UserInputs />
         <Route exact path='/popular' component={DisplayArea} />
