@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, addUser } from '../../actions';
+import { loginUser } from '../../actions';
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login'
-// import { dispatch } from 'redux';
 
 export class UserInputs extends Component {
   constructor(props) {
@@ -26,7 +25,6 @@ export class UserInputs extends Component {
     e.preventDefault();
     if (this.state.newUser) {
       this.addUser();
-      console.log(this.state.user)
       this.setState({ loggedIn: true });
     } else {
       this.fetchUser();
@@ -57,7 +55,6 @@ export class UserInputs extends Component {
     })
       .then(response => response.json())
       .then(this.fetchUser())
-      // .then(this.fetchUser())
       .then(this.setState({ newUser: false }))
       .catch(error => console.log(error.message))
   }
@@ -128,8 +125,7 @@ export const mapPropsToState = (state) => ({
 })
 
 export const mapDispatchToState = (dispatch) => ({
-  loginUser: (user) => dispatch(loginUser(user)),
-  addUser: (user) => dispatch(addUser(user))
+  loginUser: (user) => dispatch(loginUser(user))
 })
 
 export default connect(mapPropsToState, mapDispatchToState)(UserInputs)

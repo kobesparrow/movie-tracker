@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleFavorite } from '../../actions';
+import favorite from '../../images/popcorn-favorite.svg'
+import notfavorite from '../../images/popcorn.svg'
 
 export class MovieDetails extends Component {
   
@@ -46,22 +48,29 @@ export class MovieDetails extends Component {
         .then(response => response.json())
         .catch(error => console.log(error.message))
       this.props.toggleFavorite(this.props.movie_id); 
-      console.log('test remove')
     }
     
     render() {
     const { title, poster_path, overview } = this.props
-    const imageSource = `https://image.tmdb.org/t/p/w500/${poster_path}`
+    const imageSource = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    let favoriteIcon
+    if (this.props.favorite) {
+      favoriteIcon = <img src={favorite} className="favorited-icon" alt="favorite-icon" />
+    } else {
+      favoriteIcon = <img src={notfavorite} className="not-favorited-icon" alt="favorite-icon" />
+    }
     
     return (
       <div>
-        <button onClick={ this.handleClick }>Favorite</button>
-        <Link to='/popular' className='back-button'>Back</Link>
+        <button onClick={this.handleClick}>{ favoriteIcon }</button>
+        <Link to="/popular" className="back-button">
+          Back
+        </Link>
         <h1>{title}</h1>
-        <img src={imageSource} alt='movie poster' />
+        <img src={imageSource} alt="movie poster" />
         <p>{overview}</p>
       </div>
-    )
+    );
   }
 }
 
