@@ -1,62 +1,85 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toggleFavorite } from '../../actions';
+import favorite from '../../images/popcorn-favorite.svg'
+import notfavorite from '../../images/popcorn.svg'
 
 export class MovieDetails extends Component {
   
-  // handleClick = () => {
-  //   if (!this.props.favorite) {
-  //     this.addFavorite()
-  //   } else {
-  //     this.removeFavorite()
-  //   }
-  // }
+  handleClick = () => {
+    if (!this.props.favorite) {
+      this.addFavorite()
+    } else {
+      this.removeFavorite()
+    }
+  }
   
-  // addFavorite = () => {
-  //   console.log('test add')
-  //   fetch(`http://localhost:3000/api/users/${this.props.user.id}/favorites`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //         movie_id: this.props.movie_id,
-  //         title: this.props.title,
-  //         user_id: this.props.user.id,
-  //         poster_path: this.props.poster_path,
-  //         release_date: this.props.release_date,
-  //         vote_average: this.props.vote_average,
-  //         overview: this.props.overview,
-  //         favorite: !this.props.favorite
-  //       }),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //     })
-  //       .then(response => response.json())
-  //       .then(result => console.log(result))
-  //       .catch(error => console.log(error.message))
-  //   }
-    
-  //   removeFavorite = () => {
-  //     console.log('test remove')
-  //   }
+  addFavorite = () => {
+    fetch('http://localhost:3000/api/users/favorites/new', {
+      method: "POST",
+      body: JSON.stringify({
+        movie_id: this.props.movie_id,
+        title: this.props.title,
+        user_id: this.props.user.id,
+        poster_path: this.props.poster_path,
+        release_date: this.props.release_date,
+        vote_average: this.props.vote_average,
+        overview: this.props.overview,
+        favorite: true
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .catch(error => console.log(error.message));
+    this.props.toggleFavorite(this.props.movie_id);
+    }
+    removeFavorite = () => {
+      const user_id = this.props.user.id;
+      const movie_id = this.props.movie_id;
+      fetch(`http://localhost:3000/api/users/${user_id}/favorites/${movie_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .catch(error => console.log(error.message))
+      this.props.toggleFavorite(this.props.movie_id); 
+    }
     
     render() {
     const { title, poster_path, overview } = this.props
-    const imageSource = `https://image.tmdb.org/t/p/w500/${poster_path}`
+    const imageSource = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    let favoriteIcon
+    if (this.props.favorite) {
+      favoriteIcon = <img src={favorite} className="favorited-icon" alt="favorite-icon" />
+    } else {
+      favoriteIcon = <img src={notfavorite} className="not-favorited-icon" alt="favorite-icon" />
+    }
     
     return (
       <div>
-        {/* <button onClick={ this.handleClick }>Favorite</button> */}
-        <Link to='/popular' className='back-button'>Back</Link>
+        <button onClick={this.handleClick}>{ favoriteIcon }</button>
+        <Link to="/popular" className="back-button">
+          Back
+        </Link>
         <h1>{title}</h1>
-        <img src={imageSource} />
+        <img src={imageSource} alt="movie poster" />
         <p>{overview}</p>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.currentUser
+  user: state.user
 })
 
-export default connect(mapStateToProps)(MovieDetails)
+const mapDispatchToState = (dispatch) => ({
+  toggleFavorite: (movieId) => dispatch(toggleFavorite(movieId))
+})
+
+export default connect(mapStateToProps, mapDispatchToState)(MovieDetails)

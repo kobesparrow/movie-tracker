@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { popularFetcher } from './api/genreFetcher';
 import { connect } from 'react-redux';
 import './base.scss';
-import { displayMovies } from './actions';
+import { displayMovies, displayFavorites } from './actions';
 import { Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav/HeaderNav'
 import DisplayArea from './containers/DisplayArea/DisplayArea'
@@ -16,7 +16,6 @@ class App extends Component {
   }
 
   getMovies = async (type) => {
-    console.log(type)
     try {
       const movies = await popularFetcher(type)
       this.props.displayMovies(movies)
@@ -24,12 +23,24 @@ class App extends Component {
       console.log(error.message)
     }
   }
+
+  getFavorites = (userId) => {
+    const user = userId
+    fetch(`http://localhost:3000/api/users/${user}/favorites`)
+      .then(response => response.json())
+      // favorites are being saved to global state tree but not showing
+      .then(favorites => this.props.displayFavorites(favorites.data))
+      .catch(error => console.log(error.message))
+  }
   
   render() { 
-    console.log(this.props.movies)
     return (
       <div className="App">
-        <HeaderNav getMovies={ this.getMovies }/>
+        <HeaderNav 
+          getMovies={ this.getMovies } 
+          getFavorites={ this.getFavorites }
+          userId={ this.props.user.id }
+        />
         <UserInputs />
         <Route exact path='/popular' component={DisplayArea} />
         <Route exact path='/upcoming' component={DisplayArea} />
@@ -41,7 +52,7 @@ class App extends Component {
             return movie.movie_id === parseInt(match.params.id)
           })
             if(movieDescription) {
-              return <MovieDetails {...movieDescription} />
+              return <MovieDetails {...movieDescription} user={this.props.user} />
             }
         }} />
       </div>
@@ -50,11 +61,13 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   movies: state.movies
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  displayMovies: (movies) => dispatch(displayMovies(movies))
+  displayMovies: (movies) => dispatch(displayMovies(movies)),
+  displayFavorites: (favoriteMovies) => dispatch(displayFavorites(favoriteMovies))
 })
 
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, addUser } from '../../actions';
+import { loginUser } from '../../actions';
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login'
-// import { dispatch } from 'redux';
 
 export class UserInputs extends Component {
   constructor(props) {
@@ -12,8 +11,8 @@ export class UserInputs extends Component {
           name: '',
           email: '',
           password: '',
-          favorites: [],
-          newUser: false
+          newUser: false,
+          loggedIn: false,
       }
   }
 
@@ -25,9 +24,11 @@ export class UserInputs extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.newUser) {
-      this.addUser()
+      this.addUser();
+      this.setState({ loggedIn: true });
     } else {
-      this.fetchUser()
+      this.fetchUser();
+      this.setState({ loggedIn: true });
     }
   }
 
@@ -53,8 +54,20 @@ export class UserInputs extends Component {
       }
     })
       .then(response => response.json())
-      .then(newUser => this.props.addUser(newUser))
+      .then(this.fetchUser())
+      .then(this.setState({ newUser: false }))
       .catch(error => console.log(error.message))
+  }
+
+  logoutUser = (e) => {
+    e.preventDefault();
+    this.setState({
+      name: "",
+      email: "",
+      password: "",
+      newUser: false,
+      loggedIn: false
+    });
   }
 
   toggleNewUser = (e) => {
@@ -65,7 +78,13 @@ export class UserInputs extends Component {
   render() {
     const { handleSubmit, handleChange } = this
     let loginArea
-    if (this.state.newUser) {
+    if (this.state.loggedIn) {
+      loginArea = 
+        <div>
+          Hello, {this.props.user.name}
+          <button onClick={ this.logoutUser }>Logout</button>
+        </div>;
+    } else if (this.state.newUser) {
       loginArea = 
         <div>
           <SignUp
@@ -76,15 +95,21 @@ export class UserInputs extends Component {
           <button onClick={ this.toggleNewUser } className='switch-button'>Or login</button>
         </div> 
     } else {
-      loginArea = 
+      loginArea = (
         <div>
           <Login
             {...this.state}
             handleSubmit={handleSubmit}
             handleChange={handleChange}
           />
-        <button onClick={ this.toggleNewUser } className='switch-button'>createUser</button>
+          <button
+            onClick={this.toggleNewUser}
+            className="switch-button"
+          >
+            createUser
+          </button>
         </div>
+      );
     }
 
     return (
@@ -95,9 +120,12 @@ export class UserInputs extends Component {
   }
 }
 
-export const mapDispatchToState = (dispatch) => ({
-  loginUser: (user) => dispatch(loginUser(user)),
-  addUser: (user) => dispatch(addUser(user))
+export const mapPropsToState = (state) => ({
+  user: state.user
 })
 
-export default connect(null, mapDispatchToState)(UserInputs)
+export const mapDispatchToState = (dispatch) => ({
+  loginUser: (user) => dispatch(loginUser(user))
+})
+
+export default connect(mapPropsToState, mapDispatchToState)(UserInputs)

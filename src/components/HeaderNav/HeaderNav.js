@@ -3,9 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 
 export default class HeaderNav extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     return (
@@ -17,6 +14,7 @@ export default class HeaderNav extends Component {
             <NavLink to='/upcoming' onClick={ () => this.props.getMovies('upcoming?') } className='nav'>Upcoming</NavLink>
             <NavLink to='/toprated' onClick={ () => this.props.getMovies('top_rated?') } className='nav'>Top Rated</NavLink>
             <NavLink to='/nowplaying' onClick={ () => this.props.getMovies('now_playing?') } className='nav'>Now Playing</NavLink>
+            <NavLink to='/favorites' onClick={ () => this.props.getFavorites(this.props.userId) } className='nav'>Favorites</NavLink>
           </header>
         </section>
       </div>

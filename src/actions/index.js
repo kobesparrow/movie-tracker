@@ -3,9 +3,14 @@ export const displayMovies = (movies) => ({
   movies
 })
 
-export const favoriteMovie = (id) => ({
-  type: 'FAVORITE_MOVIE',
-  id
+export const toggleFavorite = (movieId) => ({
+  type: 'TOGGLE_FAVORITE',
+  movieId
+})
+
+export const displayFavorites = (favorites) => ({
+  type: 'DISPLAY_FAVORITES',
+  favorites
 })
 
 export const loginUser = (currentUser) => ({
