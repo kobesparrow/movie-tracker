@@ -14,7 +14,7 @@ export class MovieDetails extends Component {
   }
   
   addFavorite = () => {
-    fetch("http://localhost:3000/api/users/favorites/new", {
+    fetch('http://localhost:3000/api/users/favorites/new', {
       method: "POST",
       body: JSON.stringify({
         movie_id: this.props.movie_id,
@@ -32,9 +32,20 @@ export class MovieDetails extends Component {
     })
       .then(response => response.json())
       .catch(error => console.log(error.message));
-      this.props.toggleFavorite(this.props.movie_id);
+    this.props.toggleFavorite(this.props.movie_id);
     }
     removeFavorite = () => {
+      const user_id = this.props.user.id;
+      const movie_id = this.props.movie_id;
+      fetch(`http://localhost:3000/api/users/${user_id}/favorites/${movie_id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .catch(error => console.log(error.message))
+      this.props.toggleFavorite(this.props.movie_id); 
       console.log('test remove')
     }
     
