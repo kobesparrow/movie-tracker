@@ -12,7 +12,6 @@ export class UserInputs extends Component {
           name: '',
           email: '',
           password: '',
-          favorites: [],
           newUser: false,
           loggedIn: false,
       }
@@ -63,9 +62,16 @@ export class UserInputs extends Component {
       .catch(error => console.log(error.message))
   }
 
-  // logoutUser = (e) => {
-  //   e.preventDefault
-  // }
+  logoutUser = (e) => {
+    e.preventDefault();
+    this.setState({
+      name: "",
+      email: "",
+      password: "",
+      newUser: false,
+      loggedIn: false
+    });
+  }
 
   toggleNewUser = (e) => {
     e.preventDefault();
@@ -79,7 +85,7 @@ export class UserInputs extends Component {
       loginArea = 
         <div>
           Hello, {this.props.user.name}
-          <button>Logout</button>
+          <button onClick={ this.logoutUser }>Logout</button>
         </div>;
     } else if (this.state.newUser) {
       loginArea = 
