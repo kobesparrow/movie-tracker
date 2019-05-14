@@ -18,8 +18,7 @@ class DisplayArea extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
-  user: state.user
+  movies: state.movies
 })
 
 

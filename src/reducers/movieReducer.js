@@ -11,6 +11,14 @@ export const movieReducer = ( state=[], action) => {
           overview: movie.overview,
           favorite: false}
       })
+      case 'TOGGLE_FAVORITE': 
+        let newState = [...state].map(movie => {
+          if (movie.movie_id === action.movieId) {
+            movie.favorite = !movie.favorite
+          }
+          return movie
+        })
+        return newState
     default:
       return state
   }

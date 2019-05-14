@@ -1,13 +1,10 @@
 export const userReducer = (state = {}, action) => {
-  switch(action.type) {
-    case 'LOGIN_USER':
+  switch (action.type) {
+    case "LOGIN_USER":
       return action.currentUser;
-    case 'ADD_USER':
+    case "ADD_USER":
       return action.newUser;
-    case 'FAVORITE_MOVIE':
-      let newFavorite = action.id
-      return {...state, favorites: [...state.favorites, newFavorite]} 
     default:
-      return state
+      return state;
   }    
 }

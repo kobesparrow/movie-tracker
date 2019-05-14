@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toggleFavorite } from '../../actions';
 
 export class MovieDetails extends Component {
   
@@ -13,27 +14,26 @@ export class MovieDetails extends Component {
   }
   
   addFavorite = () => {
-    fetch('http://localhost:3000/api/users/favorites/new', {
-      method: 'POST',
+    fetch("http://localhost:3000/api/users/favorites/new", {
+      method: "POST",
       body: JSON.stringify({
-          movie_id: this.props.movie_id,
-          title: this.props.title,
-          user_id: this.props.user.id,
-          poster_path: this.props.poster_path,
-          release_date: this.props.release_date,
-          vote_average: this.props.vote_average,
-          overview: this.props.overview,
-          favorite: true
-        }),
+        movie_id: this.props.movie_id,
+        title: this.props.title,
+        user_id: this.props.user.id,
+        poster_path: this.props.poster_path,
+        release_date: this.props.release_date,
+        vote_average: this.props.vote_average,
+        overview: this.props.overview,
+        favorite: true
+      }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
-      })
-        .then(response => response.json())
-        .then(result => console.log('result', result))
-        .catch(error => console.log(error.message))
+    })
+      .then(response => response.json())
+      .catch(error => console.log(error.message));
+      this.props.toggleFavorite(this.props.movie_id);
     }
-    
     removeFavorite = () => {
       console.log('test remove')
     }
@@ -58,4 +58,8 @@ const mapStateToProps = (state) => ({
   user: state.user
 })
 
-export default connect(mapStateToProps)(MovieDetails)
+const mapDispatchToState = (dispatch) => ({
+  toggleFavorite: (movieId) => dispatch(toggleFavorite(movieId))
+})
+
+export default connect(mapStateToProps, mapDispatchToState)(MovieDetails)
