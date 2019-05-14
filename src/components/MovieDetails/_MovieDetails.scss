@@ -1,7 +1,85 @@
+h3 {
+  font-size: 40px;
+  margin: 10px 10px 25px 0px;
+}
+
+.movie-details-main-info {
+  display: flex;
+}
+
+.details-header-image {
+  height: 510px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.image-holder {
+  object-fit: cover;
+}
+
+.movie-details-header {
+  text-align: left;
+  margin-right: 10px;
+}
+
+.movie-details-subheader {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.movie-details-header p {
+  margin-top: 5px;
+}
+
+.favorite-button-div {
+  position: absolute;
+  align-items: baseline;
+  bottom: 50px;
+  right: 14px;
+  display: flex;
+}
+
+.favorite-button-div button {
+  border: 0px;
+  cursor: pointer;
+}
+
 .favorited-icon {
-  height: 50px;
+  height: 40px;
 }
 
 .not-favorited-icon {
-  height: 50px;
+  height: 40px;
 }
+
+.back-button {
+  color: #000000;
+  padding: 4px 10px;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.back-button:hover {
+  background-color: $primary-color;
+  color: $secondary-color;
+  border-radius: 35px;
+
+}
+
+.left-arrow {
+  height: 20px;
+  position: relative;
+  top: 3px;
+  right: 8px;
+  padding-left: 5px;
+}
+
+.back-button-div {
+  position: absolute;
+  left: 10px;
+}
+
+
+
+
