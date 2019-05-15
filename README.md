@@ -25,6 +25,18 @@ Instructions: Browse movies by categories provided in the navigation bar, click 
 
 ## Screenshots
 
+Screencaptured main landing page:
+[![Screen-Shot-2019-05-14-at-11-05-05-PM.png](https://i.postimg.cc/ydhX4GQ1/Screen-Shot-2019-05-14-at-11-05-05-PM.png)](https://postimg.cc/WF3J05cC)
+
+Screencaptured movie detail page:
+[![screencapture-localhost-3001-popular-450465-2019-05-14-23-02-17.png](https://i.postimg.cc/DzXP501b/screencapture-localhost-3001-popular-450465-2019-05-14-23-02-17.png)](https://postimg.cc/MczBpWPW)
+
+Wireframed main page:
+[![Screen-Shot-2019-05-14-at-10-57-22-PM.png](https://i.postimg.cc/m2mjg0bh/Screen-Shot-2019-05-14-at-10-57-22-PM.png)](https://postimg.cc/56FLPKQM)
+
+Wireframed movie detail page:
+[![Screen-Shot-2019-05-14-at-10-57-37-PM.png](https://i.postimg.cc/W1tnFX38/Screen-Shot-2019-05-14-at-10-57-37-PM.png)](https://postimg.cc/yD492h03)
+
 
 ## Learning goals
 
@@ -41,4 +53,4 @@ Our biggest technical win was on day three when we spent hours chasing the abili
 #### Biggest Struggle
 
 Day eight was filled with frustration, with the project due in less than 36 hours we struggled to reach the second iteration of functionality. After brainstorming and overthinking a great deal of processes we asked for help and still couldn't get it to work. Forcing ourselves to pause for poise, the solution — a syntactic misunderstnding of Redux — provided progress and better comprehension of how Redux operates. The ensuing capacity to manipulate Redux allowed us to work through further functionality. 
-
+cod
