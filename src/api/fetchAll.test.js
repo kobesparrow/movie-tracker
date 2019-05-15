@@ -2,7 +2,6 @@ import {fetchAll} from './fetchAll';
 
 describe('fetchAll', () => {
     let mockData;
-    let fetchMock;
 
     beforeEach(() => {
         mockData = {

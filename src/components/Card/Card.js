@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux';
 
-export class Card extends Component {
+export default class Card extends Component {
   
   render() {
     const imageSource = `https://image.tmdb.org/t/p/w500/${this.props.poster_path}`
@@ -14,11 +13,7 @@ export class Card extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  user: state.currentUser
-})
 
-export default connect(mapStateToProps)(Card)
 
 
 
