@@ -26,7 +26,7 @@ Instructions: Browse movies by categories provided in the navigation bar, click 
 ## Screenshots
 
 Screencaptured main landing page:
-[![Screen-Shot-2019-05-14-at-11-05-05-PM.png](https://i.postimg.cc/ydhX4GQ1/Screen-Shot-2019-05-14-at-11-05-05-PM.png)](https://postimg.cc/WF3J05cC)
+[![Screen-Shot-2019-05-14-at-11-05-34-PM.png](https://i.postimg.cc/GmxWdvzd/Screen-Shot-2019-05-14-at-11-05-34-PM.png)](https://postimg.cc/BjtYCLdV)
 
 Screencaptured movie detail page:
 [![screencapture-localhost-3001-popular-450465-2019-05-14-23-02-17.png](https://i.postimg.cc/DzXP501b/screencapture-localhost-3001-popular-450465-2019-05-14-23-02-17.png)](https://postimg.cc/MczBpWPW)
