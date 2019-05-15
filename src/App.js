@@ -5,7 +5,7 @@ import './base.scss';
 import { displayMovies, displayFavorites } from './actions';
 import { Route } from 'react-router-dom';
 import HeaderNav from './components/HeaderNav/HeaderNav'
-import DisplayArea from './containers/DisplayArea/DisplayArea'
+import DisplayArea from './Containers/DisplayArea/DisplayArea'
 import UserInputs from './components/UserInputs/UserInputs'
 import MovieDetails from './components/MovieDetails/MovieDetails'
 
