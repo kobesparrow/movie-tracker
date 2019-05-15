@@ -23,10 +23,10 @@ describe('actions', () => {
 
   it("should create an action object with type DISPLAY_FAVORITES", () => {
     //setup
-    const favorites = [{}, {}];
-    const expected = { type: "TOGGLE_FAVORITE", favorites };
+    const movieId = 12;
+    const expected = { type: "TOGGLE_FAVORITE", movieId };
     //execution
-    const result = actions.toggleFavorite(favorites);
+    const result = actions.toggleFavorite(movieId);
     //expectation
     expect(result).toEqual(expected);
   });
@@ -49,5 +49,24 @@ describe('actions', () => {
     const result = actions.addUser(newUser);
     //expectation
     expect(result).toEqual(expected);
+  });
+
+  it('should empty the state when action logoutUserGlobally is called', () => {
+    const expected = {type: 'LOGOUT_USER'}
+    const result = actions.logoutUserGlobally()
+    expect(result).toEqual(expected)
+  });
+
+  it('should empty movies when emptyMoviesState is called', () => {
+    const expected = {type: 'EMPTY_MOVIES'}
+    const result = actions.emptyMovieState()
+    expect(result).toEqual(expected)
+  });
+
+  it('should create an error message in store when hasErrored is called', () => {
+    const message = 'Failed'
+    const expected = {type: 'HAS_ERRORED', message}
+    const result = actions.hasErrored(message)
+    expect(result).toEqual(expected)
   });
 })
