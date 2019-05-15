@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser, logoutUserGlobally, emptyMovieState } from "../../actions";
+import { loginUser, logoutUserGlobally, emptyMovieState, hasErrored } from "../../actions";
 import SignUp from '../SignUp/SignUp';
 import Login from '../Login/Login'
 
@@ -24,9 +24,11 @@ export class UserInputs extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.state.newUser) {
+      this.props.hasErrored('')
       this.addUser();
       this.setState({ loggedIn: true });
     } else {
+      this.props.hasErrored('')
       this.fetchUser();
       this.setState({ loggedIn: true });
     }
@@ -42,7 +44,7 @@ export class UserInputs extends Component {
     })
       .then(response => response.json())
       .then(currentUser => this.props.loginUser(currentUser.data))
-      .catch(error => console.log(error.message))
+      .catch(error => this.props.hasErrored(error.message))
   }
 
   addUser = () => {
@@ -56,7 +58,7 @@ export class UserInputs extends Component {
       .then(response => response.json())
       .then(this.fetchUser())
       .then(this.setState({ newUser: false }))
-      .catch(error => console.log(error.message))
+      .catch(error => this.props.hasErrored(error.message))
   }
 
   logoutUser = (e) => {
@@ -74,18 +76,25 @@ export class UserInputs extends Component {
 
   toggleNewUser = (e) => {
     e.preventDefault();
+    this.props.hasErrored('')
     this.setState({ newUser: !this.state.newUser })
   }
 
   render() {
     const { handleSubmit, handleChange } = this
     let loginArea
-    if (this.state.loggedIn) {
-      loginArea = 
+    if (this.props.error.length > 0 && this.state.loggedIn) {
+      loginArea = (
         <div>
-          Hello, {this.props.user.name}
-          <button onClick={ this.logoutUser }>Logout</button>
-        </div>;
+          <p>User Does not exist try again or create new user</p>
+          <Login
+            {...this.state}
+            handleSubmit={handleSubmit}
+            handleChange={handleChange}
+          />
+          <button onClick={this.toggleNewUser}>Create User</button>
+        </div>
+      )
     } else if (this.state.newUser) {
       loginArea = 
         <div>
@@ -96,7 +105,13 @@ export class UserInputs extends Component {
           />
           <button onClick={ this.toggleNewUser } className='switch-button'>Or login</button>
         </div> 
-    } else {
+    } else if (this.state.loggedIn && this.props.error.length === 0) {
+      loginArea = 
+        <div>
+          Hello, {this.props.user.name}
+          <button onClick={ this.logoutUser }>Logout</button>
+        </div>;
+    }else if (!this.state.loggedIn) {
       loginArea = (
         <div>
           <Login
@@ -123,13 +138,16 @@ export class UserInputs extends Component {
 }
 
 export const mapPropsToState = (state) => ({
-  user: state.user
+  user: state.user,
+  error: state.error
 })
 
-export const mapDispatchToState = dispatch => ({
-  loginUser: user => dispatch(loginUser(user)),
+export const mapDispatchToState = (dispatch) => ({
+  loginUser: (user) => dispatch(loginUser(user)),
+  hasErrored: (message) => dispatch(hasErrored(message)),
   logoutUserGlobally: () => dispatch(logoutUserGlobally()),
   emptyMovieState: () => dispatch(emptyMovieState())
 });
 
 export default connect(mapPropsToState, mapDispatchToState)(UserInputs)
+
