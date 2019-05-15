@@ -7,7 +7,7 @@ export default class HeaderNav extends Component {
   render() {
     return (
       <div>
-          <h1>Movie Tracker</h1>
+          {/* <h1>Movie Tracker</h1> */}
         <section className="header-section">
           <header>
             <NavLink to='/popular' onClick={ () => this.props.getMovies('popular?') } className='nav'>Popular</NavLink>

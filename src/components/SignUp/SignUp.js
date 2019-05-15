@@ -3,7 +3,6 @@ import React from 'react';
 const SignUp = ({name, password, email, handleChange, handleSubmit}) => {
   return (
     <div>
-      <h4>Sign up:</h4>
       <form onSubmit={handleSubmit}>
         <label>
           Name

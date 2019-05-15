@@ -6,7 +6,6 @@ const Login = ({ password, email, handleChange, handleSubmit }) => {
 
   return (
     <div>
-      <h4>Login:</h4>
       <form onSubmit={handleSubmit}>
         <label>
           E-mail
