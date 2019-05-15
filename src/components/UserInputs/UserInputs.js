@@ -83,6 +83,7 @@ export class UserInputs extends Component {
   render() {
     const { handleSubmit, handleChange } = this
     let loginArea
+
     if (this.props.error.length > 0 && this.state.loggedIn) {
       loginArea = (
         <div>
@@ -97,7 +98,7 @@ export class UserInputs extends Component {
       )
     } else if (this.state.newUser) {
       loginArea = 
-        <div>
+        <div className='user-inputs'>
           <SignUp
             {...this.state}
             handleSubmit={handleSubmit}
@@ -113,7 +114,7 @@ export class UserInputs extends Component {
         </div>;
     }else if (!this.state.loggedIn) {
       loginArea = (
-        <div>
+        <div className='user-inputs'>
           <Login
             {...this.state}
             handleSubmit={handleSubmit}
@@ -121,7 +122,7 @@ export class UserInputs extends Component {
           />
           <button
             onClick={this.toggleNewUser}
-            className="switch-button"
+            // className="switch-button"
           >
             createUser
           </button>
@@ -130,7 +131,8 @@ export class UserInputs extends Component {
     }
 
     return (
-      <div>
+      <div className='user-header'>
+        <img src="https://fontmeme.com/permalink/190514/42bebcf1f8bf5d7adde5bb781fba4c10.png" className='title-image' alt="retro-fonts" />
         { loginArea }
       </div>
     )

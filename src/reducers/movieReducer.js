@@ -9,6 +9,7 @@ export const movieReducer = ( state=[], action) => {
           release_date: movie.release_date,
           vote_average: movie.vote_average,
           overview: movie.overview,
+          backdrop_path: movie.backdrop_path,
           favorite: false}
       })
       case 'TOGGLE_FAVORITE': 

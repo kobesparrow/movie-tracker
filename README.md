@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Talking Pictures
 
-## Available Scripts
+##### by Mark Collins and Duy Thanh Vu
 
-In the project directory, you can run:
+Movie Tracker is a partner project assigned over a nine-day period in mod three at Turing School in Denver, CO. Our iteration is called Talking Pictures as an homage to the movie euphemism and also because it fosters conversations about movies.
 
-### `npm start`
+The project represents our first time implementing React Router and Redux, as well as cementing a better understanding of previous concepts.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Intall/Setup
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- `clone the repo`
+- `run npm install`
+- `run npm start`
+- direct your browswer to localhost:3000
 
-### `npm test`
+Instructions: Browse movies by categories provided in the navigation bar, click on movie posters in the display area for additonal details or login to favorite selected movies for later.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Stack
+- React
+- Redux
+- Router
+- SCSS
+- Jest/Enzyme
+- Git/GitHub
 
-### `npm run build`
+## Screenshots
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Learning goals
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Having learned React Redux and Router the day before starting the project, our primary goal was the grasp the logic and syntax of these new frameworks. Talking Pictures represents the ideal project scope to understand the benefit of Redux and Router when working with larger codebases. 
 
-### `npm run eject`
+Given the pace of Turing School's instruction, we also set out to further cement our understanding of core concepts learned in previous modules. This includes, but is in no way limited to: React, making and breaking out fetch calls, testing with Jest and Enzyme, as well as taking advantage of SCSS functionality.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Biggest Wins
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Teamwork played a large role in the sucess of Talking Pictures. With a tenuous grasp of React's frameworks we came together to support each other and by building out the files together we filled in the gaps as a team. Similarly, as the project coallesced we understood the need to break out into smaller groups to accomplish more in the limited time given and then came together to help each other understand the code we'd written on our own.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Our biggest technical win was on day three when we spent hours chasing the ability for users to login and after asking for help and working with fellow classmates we sequestered ourselves and step-by-step walking through the code necessary we saw our new user show up on our local server and many high fives were shared.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Biggest Struggle
 
-## Learn More
+Day eight was filled with frustration, with the project due in less than 36 hours we struggled to reach the second iteration of functionality. After brainstorming and overthinking a great deal of processes we asked for help and still couldn't get it to work. Forcing ourselves to pause for poise, the solution — a syntactic misunderstnding of Redux — provided progress and better comprehension of how Redux operates. The ensuing capacity to manipulate Redux allowed us to work through further functionality. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

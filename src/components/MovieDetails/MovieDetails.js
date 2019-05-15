@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toggleFavorite } from '../../actions';
 import favorite from '../../images/popcorn-favorite.svg'
-import notfavorite from '../../images/popcorn.svg'
+import notFavorite from '../../images/popcorn.svg'
+import leftArrow from '../../images/left-arrow.svg'
 
 export class MovieDetails extends Component {
   
@@ -26,6 +27,7 @@ export class MovieDetails extends Component {
         release_date: this.props.release_date,
         vote_average: this.props.vote_average,
         overview: this.props.overview,
+        backdrop_path: this.props.backdrop_path,
         favorite: true
       }),
       headers: {
@@ -51,25 +53,46 @@ export class MovieDetails extends Component {
     }
     
     render() {
-    const { title, poster_path, overview } = this.props
-    const imageSource = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    const { title, overview, backdrop_path } = this.props
+    const imageSource = `https://image.tmdb.org/t/p/w1280/${backdrop_path}`;
     let favoriteIcon
     if (this.props.favorite) {
       favoriteIcon = <img src={favorite} className="favorited-icon" alt="favorite-icon" />
     } else {
-      favoriteIcon = <img src={notfavorite} className="not-favorited-icon" alt="favorite-icon" />
+      favoriteIcon = <img src={notFavorite} className="not-favorited-icon" alt="favorite-icon" />
     }
     
     return (
-      <div>
-        <button onClick={this.handleClick}>{ favoriteIcon }</button>
-        <Link to="/popular" className="back-button">
-          Back
-        </Link>
-        <h1>{title}</h1>
-        <img src={imageSource} alt="movie poster" />
-        <p>{overview}</p>
-      </div>
+      <article className="movie-details">
+        <div className="movie-details-main-info">
+          <div className="image-holder">
+            <img
+              src={imageSource}
+              className="details-header-image"
+              alt="movie poster"
+            />
+          </div>
+          <div className="movie-details-header">
+            <h3>{title}</h3>
+            <span className="movie-details-subheader">Overview:</span>
+            <p>{overview}</p>
+            <div className="favorite-button-div">
+              <span className="movie-details-subheader">Favorite:</span>
+              <button onClick={this.handleClick}>{favoriteIcon}</button>
+            </div>
+          </div>
+        </div>
+        <div className="back-button-div">
+          <Link to="/popular" className="back-button">
+            <img
+              src={leftArrow}
+              className="left-arrow"
+              alt="back button icon"
+            />{" "}
+            BACK
+          </Link>
+        </div>
+      </article>
     );
   }
 }

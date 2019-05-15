@@ -36,12 +36,12 @@ class App extends Component {
   render() { 
     return (
       <div className="App">
+        <UserInputs />
         <HeaderNav 
           getMovies={ this.getMovies } 
           getFavorites={ this.getFavorites }
           userId={ this.props.user.id }
         />
-        <UserInputs />
         <Route exact path='/popular' component={DisplayArea} />
         <Route exact path='/upcoming' component={DisplayArea} />
         <Route exact path='/toprated' component={DisplayArea} />
