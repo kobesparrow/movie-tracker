@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SignUp = ({name, password, email, handleChange, handleSubmit}) => {
+const SignUp = ({name, password, email, handleChange, handleSubmit, userState}) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -36,8 +36,9 @@ const SignUp = ({name, password, email, handleChange, handleSubmit}) => {
         </label>
         <input
           type='submit'
-          value='Login'
+          value='Sign Up'
         />
+        <button onClick={() => userState('initial')}>GO BACK</button>
       </form>
     </div>
   )
