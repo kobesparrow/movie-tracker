@@ -45,10 +45,10 @@ export class UserInputs extends Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(currentUser => this.props.loginUser(currentUser.data))
-      .then(this.setState({ loginArea: 'logged in' }))
-      .catch(error => console.log(error.message))
+    .then(response => response.json())
+    .then(currentUser => this.props.loginUser(currentUser.data))
+    .then(this.setState({ loginArea: 'logged in' }))
+    .catch(error => this.setState({ loginArea: error.message }))
   }
 
   addUser = () => {
@@ -59,10 +59,12 @@ export class UserInputs extends Component {
         'Content-Type': 'application/json'
       }
     })
-      .then(response => response.json())
-      .then(this.fetchUser)
-      .catch(error => this.props.hasErrored(error.message))
+    .then(response => response.json())
+    .then(this.fetchUser)
+    .catch(error => console.log(error.message))
   }
+
+  // this.setState({ loginArea: error.message })
 
   logoutUser = (e) => {
     e.preventDefault();
@@ -76,12 +78,6 @@ export class UserInputs extends Component {
     });
     this.props.logoutUserGlobally();
     this.props.emptyMovieState();
-  }
-
-  toggleNewUser = (e) => {
-    e.preventDefault();
-    this.props.hasErrored('')
-    this.setState({ newUser: !this.state.newUser })
   }
 
   userState = (status) => {
@@ -111,23 +107,22 @@ export class UserInputs extends Component {
                   <p>Hello, { this.props.user.name }</p>
                   <button onClick={ this.logoutUser }>Logout</button>
                 </div>;
+      case 'Unexpected token < in JSON at position 0':
+        return  <div>
+                  <p>Password incorrect or user does not exist.</p>
+                  <LoginSelect userState={this.userState} />
+                </div>
       default:
         return null
     }
   }
 
-
   render() {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    let today = new Date();
-    var date = (months[today.getMonth()]) + ' ' + today.getDate() + ', ' + today.getFullYear()
- 
     return (
-      <div className='user-header'>
+      <section className='user-header'>
         <img src="https://fontmeme.com/permalink/190514/42bebcf1f8bf5d7adde5bb781fba4c10.png" className='title-image' alt="retro-fonts" />
-        { date }
         { this.renderUserArea(this.state.loginArea) }
-      </div>
+      </section>
     )
   }
 }

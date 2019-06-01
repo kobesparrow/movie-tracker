@@ -20,7 +20,7 @@ class App extends Component {
       const movies = await popularFetcher(type)
       this.props.displayMovies(movies)
     } catch (error) {
-      console.log(error.message)
+      Window.alert(error.message)
     }
   }
 
@@ -28,9 +28,8 @@ class App extends Component {
     const user = userId
     fetch(`http://localhost:3000/api/users/${user}/favorites`)
       .then(response => response.json())
-      // favorites are being saved to global state tree but not showing
       .then(favorites => this.props.displayFavorites(favorites.data))
-      .catch(error => console.log(error.message))
+      .catch(error => Window.alert(error.message))
   }
   
   render() { 
