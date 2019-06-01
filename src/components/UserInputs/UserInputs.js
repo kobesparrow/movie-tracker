@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loginUser, logoutUserGlobally, emptyMovieState, hasErrored } from "../../actions";
 import SignUp from '../SignUp/SignUp';
-import Login from '../Login/Login'
+import Login from '../Login/Login';
+import LoginSelect from '../LoginSelect/LoginSelect';
 
 export class UserInputs extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-          name: '',
-          email: '',
-          password: '',
-          newUser: false,
-          loggedIn: false,
-      }
+    super(props);
+      
+    this.state = {
+      name: '',
+      email: '',
+      password: '',
+      newUser: false,
+      loggedIn: false,
+      loginArea: 'initial'
+      // errorMessage: ''
+    }
   }
 
   handleChange = (e) => {
@@ -23,15 +27,22 @@ export class UserInputs extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.newUser) {
-      this.props.hasErrored('')
-      this.addUser();
-      this.setState({ loggedIn: true });
-    } else {
-      this.props.hasErrored('')
-      this.fetchUser();
-      this.setState({ loggedIn: true });
-    }
+    console.log('test')
+
+
+    // if (this.state.newUser) {
+    //   this.props.hasErrored('')
+    //   this.addUser();
+    //   this.setState({ loggedIn: true });
+    // } else {
+    //   this.props.hasErrored('')
+    //   this.fetchUser();
+    //   this.setState({ loggedIn: true });
+    // }
+  }
+
+  loginUser = () => {
+    
   }
 
   fetchUser = () => {
@@ -44,8 +55,10 @@ export class UserInputs extends Component {
     })
       .then(response => response.json())
       .then(currentUser => this.props.loginUser(currentUser.data))
-      .catch(error => this.props.hasErrored(error.message))
+      .catch(error => console.log(error.message))
   }
+
+  // this.setState({ loginArea: error. }
 
   addUser = () => {
     fetch('http://localhost:3000/api/users/new', {
@@ -80,9 +93,54 @@ export class UserInputs extends Component {
     this.setState({ newUser: !this.state.newUser })
   }
 
+  // showLogin = () => {
+  //   console.log('test') 
+  //   loginArea =
+  //     <div className='user-inputs'>
+  //       <Login
+  //         {...this.state}
+  //         handleSubmit={handleSubmit}
+  //         handleChange={handleChange}
+  //       />
+  //       <button
+  //         onClick={this.toggleNewUser}
+  //       // className="switch-button"
+  //       >
+  //         createUser
+  //         </button>
+  //     </div>
+  // }
+
+  userState = (status) => {
+    this.setState({ loginArea: status })
+  }
+
+  renderUserArea = (status) => {
+    switch (status) {
+      case 'initial':
+        return <LoginSelect userState={ this.userState }/>
+      case 'login':
+        return <Login 
+                  userState={ this.userState }
+                  handleSubmit={ this.handleSubmit }
+                  handleChange={ this.handleChange }
+                />
+      case 'sign up':
+        return <SignUp userState={ this.userState } />
+      default:
+        return console.log('default')
+    }
+  }
+
+
   render() {
     const { handleSubmit, handleChange } = this
     let loginArea
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let today = new Date();
+    var date = (months[today.getMonth()]) + ' ' + today.getDate() + ', ' + today.getFullYear()
+
 
     if (this.props.error.length > 0 && this.state.loggedIn) {
       loginArea = (
@@ -113,27 +171,16 @@ export class UserInputs extends Component {
           <button onClick={ this.logoutUser }>Logout</button>
         </div>;
     }else if (!this.state.loggedIn) {
-      loginArea = (
-        <div className='user-inputs'>
-          <Login
-            {...this.state}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-          />
-          <button
-            onClick={this.toggleNewUser}
-            // className="switch-button"
-          >
-            createUser
-          </button>
-        </div>
-      );
-    }
 
+    }
+    
+    
+    /////////////////RETURN, BITCHES!!!!!!!!!!!!//////////////////////////////
     return (
       <div className='user-header'>
         <img src="https://fontmeme.com/permalink/190514/42bebcf1f8bf5d7adde5bb781fba4c10.png" className='title-image' alt="retro-fonts" />
-        { loginArea }
+        { date }
+        { this.renderUserArea(this.state.loginArea) }
       </div>
     )
   }
