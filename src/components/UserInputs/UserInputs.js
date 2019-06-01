@@ -27,7 +27,9 @@ export class UserInputs extends Component {
   
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('test')
+    this.state.loginArea === 'login' 
+      ? this.login()
+      : this.signUp()
 
 
     // if (this.state.newUser) {
@@ -41,8 +43,14 @@ export class UserInputs extends Component {
     // }
   }
 
-  loginUser = () => {
-    
+  login = () => {
+    this.fetchUser()
+    // await this.setState({ loginArea: 'logged in'});
+  }
+
+  signUp = () => {
+    this.addUser()
+    // await this.login()
   }
 
   fetchUser = () => {
@@ -55,6 +63,7 @@ export class UserInputs extends Component {
     })
       .then(response => response.json())
       .then(currentUser => this.props.loginUser(currentUser.data))
+      .then(this.setState({ loginArea: 'logged in' }))
       .catch(error => console.log(error.message))
   }
 
@@ -69,8 +78,8 @@ export class UserInputs extends Component {
       }
     })
       .then(response => response.json())
-      .then(this.fetchUser())
-      .then(this.setState({ newUser: false }))
+      .then(this.fetchUser)
+      // .then(this.setState({ loginArea: 'logged in' }))
       .catch(error => this.props.hasErrored(error.message))
   }
 
@@ -81,7 +90,8 @@ export class UserInputs extends Component {
       email: "",
       password: "",
       newUser: false,
-      loggedIn: false
+      loggedIn: false,
+      loginArea: 'initial'
     });
     this.props.logoutUserGlobally();
     this.props.emptyMovieState();
@@ -120,13 +130,24 @@ export class UserInputs extends Component {
       case 'initial':
         return <LoginSelect userState={ this.userState }/>
       case 'login':
-        return <Login 
+        return  <Login
+                  { ...this.state }
                   userState={ this.userState }
                   handleSubmit={ this.handleSubmit }
                   handleChange={ this.handleChange }
                 />
       case 'sign up':
-        return <SignUp userState={ this.userState } />
+        return  <SignUp
+                  { ...this.state }
+                  handleSubmit={ this.handleSubmit }
+                  handleChange={ this.handleChange }
+                  userState={ this.userState } 
+                />
+      case 'logged in':
+        return  <div>
+                  <p>Hello, { this.props.user.name }</p>
+                  <button onClick={this.logoutUser}>Logout</button>
+                </div>;
       default:
         return console.log('default')
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = ({ handleChange, handleSubmit, userState }) => {
+const Login = ({ password, email, handleChange, handleSubmit, userState }) => {
 
   
 
