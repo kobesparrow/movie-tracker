@@ -13,10 +13,7 @@ export class UserInputs extends Component {
       name: '',
       email: '',
       password: '',
-      newUser: false,
-      loggedIn: false,
       loginArea: 'initial'
-      // errorMessage: ''
     }
   }
 
@@ -30,27 +27,14 @@ export class UserInputs extends Component {
     this.state.loginArea === 'login' 
       ? this.login()
       : this.signUp()
-
-
-    // if (this.state.newUser) {
-    //   this.props.hasErrored('')
-    //   this.addUser();
-    //   this.setState({ loggedIn: true });
-    // } else {
-    //   this.props.hasErrored('')
-    //   this.fetchUser();
-    //   this.setState({ loggedIn: true });
-    // }
   }
 
   login = () => {
     this.fetchUser()
-    // await this.setState({ loginArea: 'logged in'});
   }
 
   signUp = () => {
     this.addUser()
-    // await this.login()
   }
 
   fetchUser = () => {
@@ -67,8 +51,6 @@ export class UserInputs extends Component {
       .catch(error => console.log(error.message))
   }
 
-  // this.setState({ loginArea: error. }
-
   addUser = () => {
     fetch('http://localhost:3000/api/users/new', {
       method: 'POST',
@@ -79,7 +61,6 @@ export class UserInputs extends Component {
     })
       .then(response => response.json())
       .then(this.fetchUser)
-      // .then(this.setState({ loginArea: 'logged in' }))
       .catch(error => this.props.hasErrored(error.message))
   }
 
@@ -102,24 +83,6 @@ export class UserInputs extends Component {
     this.props.hasErrored('')
     this.setState({ newUser: !this.state.newUser })
   }
-
-  // showLogin = () => {
-  //   console.log('test') 
-  //   loginArea =
-  //     <div className='user-inputs'>
-  //       <Login
-  //         {...this.state}
-  //         handleSubmit={handleSubmit}
-  //         handleChange={handleChange}
-  //       />
-  //       <button
-  //         onClick={this.toggleNewUser}
-  //       // className="switch-button"
-  //       >
-  //         createUser
-  //         </button>
-  //     </div>
-  // }
 
   userState = (status) => {
     this.setState({ loginArea: status })
@@ -146,57 +109,19 @@ export class UserInputs extends Component {
       case 'logged in':
         return  <div>
                   <p>Hello, { this.props.user.name }</p>
-                  <button onClick={this.logoutUser}>Logout</button>
+                  <button onClick={ this.logoutUser }>Logout</button>
                 </div>;
       default:
-        return console.log('default')
+        return null
     }
   }
 
 
   render() {
-    const { handleSubmit, handleChange } = this
-    let loginArea
-
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     let today = new Date();
     var date = (months[today.getMonth()]) + ' ' + today.getDate() + ', ' + today.getFullYear()
-
-
-    if (this.props.error.length > 0 && this.state.loggedIn) {
-      loginArea = (
-        <div>
-          <p>User Does not exist try again or create new user</p>
-          <Login
-            {...this.state}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-          />
-          <button onClick={this.toggleNewUser}>Create User</button>
-        </div>
-      )
-    } else if (this.state.newUser) {
-      loginArea = 
-        <div className='user-inputs'>
-          <SignUp
-            {...this.state}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-          />
-          <button onClick={ this.toggleNewUser } className='switch-button'>Or login</button>
-        </div> 
-    } else if (this.state.loggedIn && this.props.error.length === 0) {
-      loginArea = 
-        <div>
-          Hello, {this.props.user.name}
-          <button onClick={ this.logoutUser }>Logout</button>
-        </div>;
-    }else if (!this.state.loggedIn) {
-
-    }
-    
-    
-    /////////////////RETURN, BITCHES!!!!!!!!!!!!//////////////////////////////
+ 
     return (
       <div className='user-header'>
         <img src="https://fontmeme.com/permalink/190514/42bebcf1f8bf5d7adde5bb781fba4c10.png" className='title-image' alt="retro-fonts" />
